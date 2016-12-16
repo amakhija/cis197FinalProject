@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<% if (message != null) { %>
+		<font color="red"><%= message %><p>
+	<% } %>
+	<font color="black">
+	<h2>Hi Arts House! Login here:</h2>
+	<form class="loginform" action="checkLogin" method="post"> 
+		<p>Username:
+		<input type="text" name="username"></p>
+		<p>Password:
+		<input type="text" name="password"></p>
+		<input type="submit" value="login">
+	</form>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% if (message != null) { %>
+		<font color="red"><%= message %><p>
+	<% } %>
+	<script type="text/javascript" src="js/first.js"></script>
+	<link rel='stylesheet' href='css/fullcalendar.css' />
+	<script src='js/jquery.min.js'></script>
+	<script src='js/moment.min.js'></script>
+	<script src='js/fullcalendar.js'></script>
+	<script type="text/javascript" src="js/gcal.js"></script>
+	<script src='//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'</script>
+	<script type='text/javascript'>
+		var getCalendar = function () {
+			$.post('/getCalendar', {}, function(data, status) {
+				console.log("Inside get call");
+				$(document).ready(function() {
+					console.log("Inside creating function");
+		    		$('#calendar').fullCalendar({
+		        		googleCalendarApiKey: 'AIzaSyBQYDV0Plv2ZCh-QYwCsBdGrccL2lWkPn4',
+		        		events: {
+		            		googleCalendarId: document.getElementById('email').value;
+		        		}
+		    		});
+				});
+				document.getElementById('email').value = "";
+			});
+		};
+		
+	</script>
+</head>
+<body>
+	<font color="black">
+	<h1>Add your conflicts in the form below:</h1>
+	<form class="new-conflict" method="post" action="addNewConflict">
+		Confict start time: <input type="text" name="starttime" value="replace me with a time like: 12:00"><p>
+		Conflict end time: <input type="text" name="endtime" value="replace me with a time like: 2:00"><p>
+		Reason: <input type="text" name="reason"><p>
+		Check if legitimate: <input type="checkbox" name="legitimacy"><p>
+		<input type="submit" class="home-submit" name="submit" value="Submit & Go Home">
+		<input type="submit" class="add-another-submit" name="submit" value="Submit & Add Another">
+	</form>
+	<h4>Want to check your gcal?</h4>
+	Fill out your google email address here: 
+	<form class="email" onSubmit="getCalendar(); return false" id="form">
+		<input type="text" name="emailaddress" id="email"><p>
+		<input type="submit" name="emailsubmission" value="submit email">
+	</form>
+</body>
+</html>
